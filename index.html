@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BasedArchive</title>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    
     <style>
         :root {
             --bg: #000000;
             --surface: #0a0a0a;
             --border: #222222;
-            --primary: #8b3cba; /* Main Purple */
-            --primary-dark: #5e1f82; /* Deep Purple */
+            --primary: #8b3cba;
+            --primary-dark: #5e1f82;
             --text: #dcdcdc;
             --text-dim: #777777;
         }
@@ -85,6 +84,26 @@
             background-color: #1a1a1a;
         }
 
+        .sub-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .sub-nav button {
+            font-size: 0.8rem;
+            padding: 8px 15px;
+            background: #111;
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+        }
+
+        .sub-nav button.active {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
         .container {
             max-width: 1000px;
             margin: 40px auto;
@@ -94,6 +113,9 @@
 
         .view { display: none; }
         .view.active { display: block; }
+        
+        .music-category { display: none; }
+        .music-category.active { display: block; }
 
         #quote-display {
             background-color: var(--surface);
@@ -149,6 +171,8 @@
             margin-top: 15px;
             border: 1px solid var(--primary);
             font-size: 0.8rem;
+            cursor: pointer;
+            text-align: center;
         }
 
         .btn:hover { background-color: var(--primary); }
@@ -168,7 +192,7 @@
     <header>
         <div class="header-content">
             <img src="logo.png" alt="BA" class="logo-img" onerror="this.style.border='1px solid #8b3cba'">
-            <div class="/assets/images/text-box">
+            <div>
                 <h1>BasedArchive</h1>
                 <div style="color:#555; font-size: 0.8rem; letter-spacing: 2px;">VAULT_V1.02</div>
             </div>
@@ -189,42 +213,35 @@
                 <p id="quote-text">"Based is a lifestyle."</p>
                 <span id="quote-source">— Lil B</span>
             </div>
-            <h2>Preservation Status</h2>
-            <p>Welcome to the terminal. This archive is a high-utility, low-noise resource for the Based community. All records are indexed for historical accuracy.</p>
+            <h2>About us</h2>
+            <p>We are a team of people dedicated to preserving rapper Lil B's music. Please contact us with our information in the info tab</p>
         </section>
 
         <section id="music" class="view">
-            <h2>Mixtape Archive</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>God's Father</h3>
-                    <p>34 Tracks | Released 2012</p>
-                    <a href="#" class="btn">VIEW TRACKLIST</a>
-                </div>
-                <div class="card">
-                    <h3>Blue Flame</h3>
-                    <p>28 Tracks | Released 2010</p>
-                    <a href="#" class="btn">VIEW TRACKLIST</a>
-                </div>
+            <div class="sub-nav">
+                <button onclick="filterMusic('mixtapes')" class="sub-btn active" id="sub-mixtapes">MIXTAPES & ALBUMS</button>
+                <button onclick="filterMusic('singles')" class="sub-btn" id="sub-singles">SINGLES</button>
+            </div>
+
+            <div id="mixtapes-cat" class="music-category active">
+                <h2>Mixtapes & Albums</h2>
+                <div id="mixtape-grid" class="grid"></div>
+            </div>
+
+            <div id="singles-cat" class="music-category">
+                <h2>Singles</h2>
+                <div id="singles-grid" class="grid"></div>
             </div>
         </section>
 
         <section id="videos" class="view">
             <h2>Visual Archive</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>Wonton Soup</h3>
-                    <p>Historical Music Video | 2010</p>
-                    <a href="https://www.youtube.com/watch?v=8m5CIcbytfM" target="_blank" class="btn">WATCH VIDEO</a>
-                </div>
-            </div>
+            <div id="video-grid" class="grid"></div>
         </section>
 
         <section id="info" class="view">
             <h2>Info</h2>
-            <p><strong>Amount of tracks</strong> idfk ill update this another time</p>
             <p><strong>Credits:</strong> InternetArchive, ItzPPAP, and TuffZinc</p>
-            <p>— Takin' Over by Imposing the Positive! (2009)</p>
         </section>
 
     </div>
@@ -234,18 +251,51 @@
     </footer>
 
     <script>
-
-        function showView(viewId) {
-            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.getElementById(viewId).classList.add('active');
-            
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('btn-' + viewId).classList.add('active');
-
-            if(viewId === 'home') loadRandomQuote();
-        }
-
+        const DATA_URL = '/assets/json/data.json';
         const QUOTE_URL = '/assets/json/quotes.json';
+
+        async function loadArchiveData() {
+            try {
+                const response = await fetch(DATA_URL);
+                const data = await response.json();
+                
+                const mixtapeGrid = document.getElementById('mixtape-grid');
+                mixtapeGrid.innerHTML = data.mixtapes.map(item => `
+                    <div class="card">
+                        <h3>${item.t}</h3>
+                        <p>${item.tr} Tracks | ${item.d}</p>
+                        <div style="display:flex; gap:10px;">
+                            <a href="${item.url}" class="btn">VIEW</a>
+                            <button class="btn" style="background:#333" onclick="alert('Released: ${item.rel}')">INFO</button>
+                        </div>
+                    </div>
+                `).join('');
+
+                const singlesGrid = document.getElementById('singles-grid');
+                singlesGrid.innerHTML = data.singles.map(item => `
+                    <div class="card">
+                        <h3>${item.t}</h3>
+                        <p>${item.s || 'Single'} | ${item.d}</p>
+                        <div style="display:flex; gap:10px;">
+                            <a href="${item.url}" class="btn">LISTEN</a>
+                            <button class="btn" style="background:#333" onclick="alert('Released: ${item.rel}')">INFO</button>
+                        </div>
+                    </div>
+                `).join('');
+
+                const videoGrid = document.getElementById('video-grid');
+                videoGrid.innerHTML = data.videos.map(item => `
+                    <div class="card">
+                        <h3>${item.t}</h3>
+                        <p>${item.desc} | ${item.d}</p>
+                        <a href="${item.url}" target="_blank" class="btn">WATCH VIDEO</a>
+                    </div>
+                `).join('');
+
+            } catch (err) {
+                console.error("Error loading archive:", err);
+            }
+        }
 
         async function fetchQuotes() {
             try {
@@ -255,20 +305,30 @@
                 document.getElementById('quote-text').innerText = `"${q.t}"`;
                 document.getElementById('quote-source').innerText = `— ${q.s}`;
             } catch (err) {
-                document.getElementById('quote-text').innerText = "Stay Based. (Error loading remote file)";
+                document.getElementById('quote-text').innerText = "Stay Based. (Error)";
             }
         }
 
-        function showView(id) {
+        function showView(viewId) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            document.getElementById('nav-' + id).classList.add('active');
-            if(id === 'home') fetchQuotes();
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            const btn = document.getElementById('btn-' + viewId);
+            if(btn) btn.classList.add('active');
+            if(viewId === 'home') fetchQuotes();
         }
 
-        window.onload = fetchQuotes;
-    </script>
+        function filterMusic(cat) {
+            document.querySelectorAll('.music-category').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(cat + '-cat').classList.add('active');
+            document.getElementById('sub-' + cat).classList.add('active');
+        }
 
+        window.onload = () => {
+            fetchQuotes();
+            loadArchiveData();
+        };
+    </script>
 </body>
 </html>
