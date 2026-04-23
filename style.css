@@ -1,195 +1,116 @@
-/* Import Anton for the logo and Roboto for clean body text */
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@400;700&display=swap');
-
-/* --- Global Reset --- */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;700&display=swap');
 
 body {
-    background-color: #000000; /* Deep black */
-    color: #eeeeee; /* Off-white for better readability */
-    font-family: 'Roboto', sans-serif;
+    background-color: #050505;
+    color: #d1d1d1;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
     line-height: 1.6;
 }
 
-/* --- Header & Logo --- */
 header {
     background-color: #0a0a0a;
-    padding: 2rem 1rem;
-    border-bottom: 3px solid #5e1f82; /* Solid purple accent */
+    border-bottom: 3px solid #5e1f82;
+    padding: 20px;
 }
 
-.header-content {
-    max-width: 1100px;
+.header-wrap {
+    max-width: 1000px;
     margin: 0 auto;
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 20px;
 }
 
-.logo-image {
-    width: 80px;
-    height: 80px;
+.logo-img {
+    width: 60px;
+    height: 60px;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
     object-fit: cover;
-    background-color: #111;
-    border-radius: 4px;
 }
 
 h1 {
     font-family: 'Anton', sans-serif;
     color: #8b3cba;
-    font-size: 3rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    line-height: 1;
-}
-
-.subtitle {
-    color: #777;
-    font-size: 0.9rem;
+    margin: 0;
+    font-size: 2.5rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-top: 5px;
 }
 
-/* --- Navigation --- */
 nav {
-    background-color: #111111;
-    padding: 1rem;
+    background-color: #111;
+    padding: 10px 0;
     text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    border-bottom: 1px solid #222;
 }
 
 nav a {
     color: #b57edc;
     text-decoration: none;
-    margin: 0 1.5rem;
+    margin: 0 15px;
     font-weight: bold;
-    font-size: 1rem;
-    transition: color 0.2s;
+    font-size: 0.9rem;
 }
 
-nav a:hover, nav a.active {
-    color: #ffffff;
-    border-bottom: 2px solid #8b3cba;
+nav a:hover {
+    color: #fff;
 }
 
-/* --- Layout --- */
 .container {
     max-width: 1000px;
-    margin: 2rem auto;
-    padding: 0 1.5rem;
+    margin: 40px auto;
+    padding: 0 20px;
 }
 
-.page-title {
-    font-family: 'Anton', sans-serif;
-    color: #8b3cba;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
-}
-
-p {
-    margin-bottom: 1.2rem;
-    color: #cccccc;
-}
-
-/* --- Archive Grid & Cards --- */
-.archive-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.media-card {
+/* Quote Section */
+#quote-box {
     background-color: #0d0d0d;
-    border: 1px solid #222;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    border-left: 4px solid #5e1f82;
+    padding: 30px;
+    margin-bottom: 50px;
 }
 
-.media-card:hover {
-    border-color: #5e1f82; /* Subtle purple highlight */
-}
-
-.media-card h3 {
-    font-family: 'Anton', sans-serif;
-    color: #ffffff;
-    margin-bottom: 0.5rem;
-    letter-spacing: 1px;
-}
-
-.details {
-    font-size: 0.9rem;
-    color: #888;
-    margin-bottom: 1.5rem;
-}
-
-/* --- Buttons --- */
-.action-btn {
-    display: inline-block;
-    background-color: #5e1f82;
-    color: #ffffff;
-    text-align: center;
-    padding: 0.8rem 1rem;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 0.9rem;
-    transition: background 0.3s;
-}
-
-.action-btn:hover {
-    background-color: #8b3cba;
-}
-
-/* --- Typography Features --- */
-blockquote {
-    border-left: 5px solid #5e1f82;
-    padding: 1rem 2rem;
-    background-color: #0d0d0d;
-    margin: 2rem 0;
+#quote-text {
+    font-size: 1.4rem;
     font-style: italic;
-    color: #dddddd;
+    color: #eee;
+    margin: 0 0 10px 0;
 }
 
-cite {
-    display: block;
-    margin-top: 10px;
-    font-weight: bold;
+#quote-source {
     color: #8b3cba;
-    font-style: normal;
+    font-weight: bold;
+    font-size: 0.9rem;
 }
 
-hr {
-    border: 0;
-    border-top: 1px solid #222;
-    margin: 3rem 0;
+/* Info Section */
+.info-tab {
+    display: none; /* Hidden by default, shown via JS */
+    animation: fadeIn 0.3s ease-in;
 }
 
-/* --- Footer --- */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+h2 {
+    font-family: 'Anton', sans-serif;
+    color: #8b3cba;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+.active-content {
+    display: block;
+}
+
 footer {
     text-align: center;
-    padding: 3rem 1rem;
-    background-color: #050505;
+    padding: 40px;
     color: #444;
     font-size: 0.8rem;
-    border-top: 1px solid #111;
-}
-
-/* Mobile Adjustments */
-@media (max-width: 600px) {
-    .header-content {
-        flex-direction: column;
-        text-align: center;
-    }
-    h1 {
-        font-size: 2.2rem;
-    }
 }
