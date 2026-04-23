@@ -1,70 +1,74 @@
+/* Import Anton for the logo and Roboto for clean body text */
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@400;700&display=swap');
 
-body {
-    background-color: #0a0a0a;
-    color: #dcdcdc; 
-    font-family: 'Roboto', sans-serif;
+/* --- Global Reset --- */
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+body {
+    background-color: #000000; /* Deep black */
+    color: #eeeeee; /* Off-white for better readability */
+    font-family: 'Roboto', sans-serif;
     line-height: 1.6;
 }
 
+/* --- Header & Logo --- */
 header {
-    background-color: #111111;
-    padding: 25px 20px;
-    border-bottom: 4px solid #5e1f82; 
+    background-color: #0a0a0a;
+    padding: 2rem 1rem;
+    border-bottom: 3px solid #5e1f82; /* Solid purple accent */
+}
+
 .header-content {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
     display: flex;
-    align-items: center; 
-    gap: 20px;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 .logo-image {
-    width: 70px;
-    height: 70px;
-    background-color: #1a1a1a;
-    border: 2px solid #5e1f82;
+    width: 80px;
+    height: 80px;
     object-fit: cover;
+    background-color: #111;
     border-radius: 4px;
 }
 
-.text-container {
-    display: flex;
-    flex-direction: column;
-}
-
 h1 {
-    font-family: 'Anton', sans-serif; 
-    color: #8b3cba; 
-    margin: 0;
+    font-family: 'Anton', sans-serif;
+    color: #8b3cba;
     font-size: 3rem;
-    letter-spacing: 1px;
     text-transform: uppercase;
-    line-height: 0.9;
+    letter-spacing: 2px;
+    line-height: 1;
 }
 
 .subtitle {
+    color: #777;
     font-size: 0.9rem;
-    color: #777777;
-    margin-top: 5px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    margin-top: 5px;
 }
 
-/* NAVIGATION */
+/* --- Navigation --- */
 nav {
-    background-color: #161616;
-    padding: 15px 0;
+    background-color: #111111;
+    padding: 1rem;
     text-align: center;
-    border-bottom: 1px solid #222;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 nav a {
     color: #b57edc;
     text-decoration: none;
-    margin: 0 20px;
+    margin: 0 1.5rem;
     font-weight: bold;
     font-size: 1rem;
     transition: color 0.2s;
@@ -72,39 +76,87 @@ nav a {
 
 nav a:hover, nav a.active {
     color: #ffffff;
+    border-bottom: 2px solid #8b3cba;
 }
 
-/* MAIN CONTAINER */
+/* --- Layout --- */
 .container {
     max-width: 1000px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    min-height: 60vh;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
 }
 
 .page-title {
     font-family: 'Anton', sans-serif;
     color: #8b3cba;
     font-size: 2rem;
-    border-bottom: 2px solid #333;
-    padding-bottom: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 1.5rem;
     text-transform: uppercase;
 }
 
 p {
-    margin-bottom: 20px;
-    font-size: 1.05rem;
-    color: #bbbbbb;
+    margin-bottom: 1.2rem;
+    color: #cccccc;
 }
 
+/* --- Archive Grid & Cards --- */
+.archive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.media-card {
+    background-color: #0d0d0d;
+    border: 1px solid #222;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.media-card:hover {
+    border-color: #5e1f82; /* Subtle purple highlight */
+}
+
+.media-card h3 {
+    font-family: 'Anton', sans-serif;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.details {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 1.5rem;
+}
+
+/* --- Buttons --- */
+.action-btn {
+    display: inline-block;
+    background-color: #5e1f82;
+    color: #ffffff;
+    text-align: center;
+    padding: 0.8rem 1rem;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+.action-btn:hover {
+    background-color: #8b3cba;
+}
+
+/* --- Typography Features --- */
 blockquote {
-    border-left: 4px solid #5e1f82;
-    padding: 10px 25px;
-    margin: 40px 0;
-    background-color: #111;
+    border-left: 5px solid #5e1f82;
+    padding: 1rem 2rem;
+    background-color: #0d0d0d;
+    margin: 2rem 0;
     font-style: italic;
-    color: #dcdcdc;
+    color: #dddddd;
 }
 
 cite {
@@ -115,74 +167,29 @@ cite {
     font-style: normal;
 }
 
-.archive-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+hr {
+    border: 0;
+    border-top: 1px solid #222;
+    margin: 3rem 0;
 }
 
-.media-card {
-    background-color: #121212;
-    border: 1px solid #222;
-    padding: 20px;
-    flex: 1 1 calc(33.333% - 20px);
-    min-width: 280px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-}
-
-.media-card:hover {
-    border-color: #5e1f82;
-}
-
-.media-card h3 {
-    margin: 0 0 10px 0;
-    color: #ffffff;
-    font-family: 'Anton', sans-serif;
-    letter-spacing: 0.5px;
-}
-
-.details {
-    font-size: 0.9rem;
-    color: #888;
-    margin-bottom: 20px;
-    flex-grow: 1;
-}
-
-.action-btn {
-    display: block;
-    text-align: center;
-    background-color: #2b0f3d;
-    color: #ffffff;
-    padding: 12px;
-    text-decoration: none;
-    font-weight: bold;
-    border: 1px solid #5e1f82;
-    font-size: 0.9rem;
-    transition: background 0.2s;
-}
-
-.action-btn:hover {
-    background-color: #5e1f82;
-}
-
+/* --- Footer --- */
 footer {
     text-align: center;
-    padding: 40px 20px;
-    background-color: #000000;
-    border-top: 1px solid #1a1a1a;
-    color: #555;
-    font-size: 0.85rem;
-    margin-top: 60px;
+    padding: 3rem 1rem;
+    background-color: #050505;
+    color: #444;
+    font-size: 0.8rem;
+    border-top: 1px solid #111;
 }
 
-@media (max-width: 768px) {
+/* Mobile Adjustments */
+@media (max-width: 600px) {
     .header-content {
         flex-direction: column;
         text-align: center;
     }
-    .media-card {
-        flex: 1 1 100%;
+    h1 {
+        font-size: 2.2rem;
     }
 }
