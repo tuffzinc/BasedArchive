@@ -1,0 +1,42 @@
+{
+  "mixtapes": [
+    {
+      "t": "God's Father",
+      "d": "2012",
+      "tr": "34",
+      "rel": "March 11, 2012",
+      "url": "#"
+    }
+  ],
+  "singles": [
+    {
+      "t": "I'm God",
+      "d": "2009",
+      "s": "Prod. Clams Casino",
+      "rel": "July 2009",
+      "url": "https://example.com/im-god"
+    },
+    {
+      "t": "Wonton Soup",
+      "d": "2010",
+      "s": "Prod. Keyboard Kid",
+      "rel": "October 2010",
+      "url": "https://example.com/wonton-soup"
+    },
+    {
+      "t": "Think 4 Yourself",
+      "d": "2011",
+      "s": "Positive Message",
+      "rel": "2011",
+      "url": "https://example.com/think"
+    }
+  ],
+  "videos": [
+    {
+      "t": "Wonton Soup",
+      "d": "2010",
+      "desc": "Official Video",
+      "url": "https://www.youtube.com/watch?v=8m5CIcbytfM"
+    }
+  ]
+}
