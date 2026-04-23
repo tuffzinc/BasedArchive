@@ -3,62 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BasedArchives | Home</title>
+    <title>BasedArchive</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <div class="header-content">
-            <img src="logo.png" alt="BasedGod" class="logo-image" onerror="this.style.border='1px solid #5e1f82'">
-            <div class="text-container">
-                <h1>BasedArchives</h1>
-                <div class="subtitle">The Official Unofficial Digital Vault</div>
-            </div>
-        </div>
-    </header>
+<header>
+    <div class="header-wrap">
+        <img src="logo.png" alt="" class="logo-img" onerror="this.style.display='none'">
+        <h1>BasedArchive</h1>
+    </div>
+</header>
 
-    <nav>
-        <a href="index.html" class="active">Home</a>
-        <a href="music.html">Music</a>
-        <a href="videos.html">Videos</a>
-    </nav>
+<nav>
+    <a href="#" onclick="showTab('home')">HOME</a>
+    <a href="music.html">MUSIC</a>
+    <a href="videos.html">VIDEOS</a>
+    <a href="#" onclick="showTab('info')">INFO</a>
+</nav>
 
-    <div class="container">
-        <h2 class="page-title">Historical Preservation</h2>
-        <p>Welcome to <strong>BasedArchives</strong>. This site was built to serve as a clean, centralized terminal for the massive catalog of Lil B The BasedGod. With thousands of tracks and hundreds of videos scattered across the old internet, this archive ensures the rare gems remain accessible.</p>
-        
-        <p>Our goal is simplicity. No flashy lights, no unnecessary noise—just the media. We are currently indexing mixtapes, rare YouTube uploads, and lost freestyle footage.</p>
-
-        <div class="archive-grid" style="margin-top: 40px;">
-            <div class="media-card">
-                <h3>The Music</h3>
-                <p class="details">From the "Blue Flame" era to "Thugged Out Pissed Off." Access the full discography and rare mixtapes.</p>
-                <a href="music.html" class="action-btn">Enter Music Vault</a>
-            </div>
-
-            <div class="media-card">
-                <h3>The Visuals</h3>
-                <p class="details">Archived music videos, vlogs, and Based interviews. High-definition where possible, raw where necessary.</p>
-                <a href="videos.html" class="action-btn">Enter Video Vault</a>
-            </div>
+<div class="container">
+    
+    <div id="home-tab" class="info-tab active-content">
+        <div id="quote-box">
+            <p id="quote-text">Loading...</p>
+            <span id="quote-source"></span>
         </div>
 
-        <hr style="border: 0; border-top: 1px solid #333; margin: 50px 0;">
-
-        <h2 class="page-title">What is Based?</h2>
-        <blockquote>
-            "Based means being yourself. Not being scared of what people think about you. Not being afraid to do what you wanna do. Being positive."
-            <br><br>
-            <cite>— Lil B</cite>
-        </blockquote>
-        
-        <p>This archive operates under the same philosophy. It is a space for the fans, by the fans. If you have rare files or broken links to report, keep the energy positive and stay tuned for updates.</p>
+        <h2>Latest Preservation</h2>
+        <p>Welcome to the digital vault. This site is dedicated to archiving the history of Lil B. Simple, functional, and 100% Based.</p>
     </div>
 
-    <footer>
-        <p>&copy; 2026 BasedArchives | Thank You BasedGod</p>
-    </footer>
+    <div id="info-tab" class="info-tab">
+        <h2>Site Information</h2>
+        <p>BasedArchives is a volunteer project to index mixtapes, albums, and videos that are often lost to broken links and deleted channels.</p>
+        
+        <h3>The Philosophy</h3>
+        <p>This archive follows the original definition of Based: being yourself and not fearing judgment. We don't care about being flashy; we care about the records.</p>
+        
+        <h3>Credits</h3>
+        <p>Maintained by ItzPPAP and build by TuffZinc.</p>
+    </div>
+
+</div>
+
+<footer>
+    &copy; 2026 BasedArchive | TYBG
+</footer>
+
+<script>
+    async function getQuotes() {
+        try {
+            const response = await fetch('quotes.json');
+            const data = await response.json();
+            
+            const randomQuote = data[Math.floor(Math.random() * data.length)];
+            
+            document.getElementById('quote-text').innerText = `"${randomQuote.text}"`;
+            document.getElementById('quote-source').innerText = `— ${randomQuote.source}`;
+        } catch (err) {
+            console.error("Could not load quotes.", err);
+            document.getElementById('quote-text').innerText = "Based is a lifestyle.";
+        }
+    }
+
+    function showTab(tabName) {
+        document.querySelectorAll('.info-tab').forEach(tab => {
+            tab.classList.remove('active-content');
+        });
+        document.getElementById(tabName + '-tab').classList.add('active-content');
+    }
+
+    window.onload = getQuotes;
+</script>
 
 </body>
 </html>
